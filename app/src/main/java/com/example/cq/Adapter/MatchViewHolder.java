@@ -5,21 +5,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cq.R;
 
 public class MatchViewHolder extends RecyclerView.ViewHolder {
 
-    public ImageView star1, star2, star3, logoGame, logoTeam1, logoTeam2, imgv_cup;
+    public ImageView logoGame, logoTeam1, logoTeam2, imgv_cup;
     public TextView shortTitle, bof, matchStatus, score, team1Name, team2Name, kof1, kof2;
+    public ConstraintLayout bronzeStars, silverStars, goldStars;
 
     public MatchViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        star1 = itemView.findViewById(R.id.star1);
-        star2 = itemView.findViewById(R.id.star2);
-        star3 = itemView.findViewById(R.id.star3);
+        bronzeStars = itemView.findViewById(R.id.bronze_stars);
+        silverStars = itemView.findViewById(R.id.silver_stars);
+        goldStars = itemView.findViewById(R.id.gold_stars);
         imgv_cup = itemView.findViewById(R.id.imgv_cup);
         logoGame = itemView.findViewById(R.id.imgv_game);
         logoTeam1 = itemView.findViewById(R.id.imgv_team1);

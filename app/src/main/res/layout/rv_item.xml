@@ -102,48 +102,16 @@
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toTopOf="parent">
 
-               <ImageView
-                   android:id="@+id/star1"
-                   android:layout_width="20dp"
-                   android:layout_height="20dp"
-                   android:layout_marginStart="16dp"
-                   android:src="@drawable/ic_star"
-                   app:layout_constraintBottom_toBottomOf="parent"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toTopOf="parent"
-                   app:srcCompat="@drawable/ic_star" />
-
-               <ImageView
-                   android:id="@+id/star2"
-                   android:layout_width="20dp"
-                   android:layout_height="20dp"
-                   android:src="@drawable/ic_star"
-                   app:layout_constraintBottom_toBottomOf="@+id/star1"
-                   app:layout_constraintStart_toEndOf="@+id/star1"
-                   app:layout_constraintTop_toTopOf="@+id/star1"
-                   app:layout_constraintVertical_bias="0.0"
-                   app:srcCompat="@drawable/ic_star" />
-
-               <ImageView
-                   android:id="@+id/star3"
-                   android:layout_width="20dp"
-                   android:layout_height="20dp"
-                   android:src="@drawable/ic_star"
-                   app:layout_constraintBottom_toBottomOf="@+id/star2"
-                   app:layout_constraintStart_toEndOf="@+id/star2"
-                   app:layout_constraintTop_toTopOf="@+id/star2"
-                   app:srcCompat="@drawable/ic_star" />
 
                <ImageView
                    android:id="@+id/imgv_cup"
                    android:layout_width="21dp"
                    android:layout_height="27dp"
-                   android:layout_marginStart="25dp"
+                   android:layout_marginStart="20dp"
                    android:src="@drawable/cup_gray"
-                   app:layout_constraintBottom_toBottomOf="@+id/star3"
-                   app:layout_constraintStart_toEndOf="@+id/star3"
-                   app:layout_constraintTop_toTopOf="@+id/star3"
-                   app:layout_constraintVertical_bias="0.461"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toEndOf="@+id/barrier"
+                   app:layout_constraintTop_toTopOf="parent"
                    app:srcCompat="@drawable/cup_gray" />
 
                <TextView
@@ -173,6 +141,7 @@
                    app:layout_constraintTop_toTopOf="@+id/short_title"
                    app:layout_constraintVertical_bias="0.0" />
 
+
                <TextView
                    android:id="@+id/bof"
                    android:layout_width="19dp"
@@ -188,17 +157,114 @@
 
                <TextView
                    android:id="@+id/match_status"
-                   android:layout_width="91dp"
+                   android:layout_width="125dp"
                    android:layout_height="22dp"
                    android:layout_marginEnd="8dp"
-                   android:gravity="center"
                    android:text="Завершен"
+                   android:textAlignment="textEnd"
                    android:textColor="@color/light_gray"
                    android:textStyle="bold"
-                   app:layout_constraintBottom_toBottomOf="@+id/smth"
+                   app:layout_constraintBottom_toBottomOf="@+id/bof"
                    app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintTop_toTopOf="@+id/smth"
-                   app:layout_constraintVertical_bias="0.0" />
+                   app:layout_constraintTop_toTopOf="@+id/bof" />
+
+               <androidx.constraintlayout.widget.Barrier
+                   android:id="@+id/barrier"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:barrierDirection="end"
+                   app:constraint_referenced_ids="bronze_stars,silver_stars"
+                   tools:layout_editor_absoluteX="411dp"
+                   tools:layout_editor_absoluteY="5dp" />
+
+               <androidx.constraintlayout.widget.ConstraintLayout
+                   android:id="@+id/gold_stars"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="16dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent">
+
+                   <ImageView
+                       android:id="@+id/star_gold"
+                       android:layout_width="25dp"
+                       android:layout_height="25dp"
+                       android:src="@drawable/ic_star_gold"
+                       app:layout_constraintBottom_toBottomOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toTopOf="parent" />
+
+               </androidx.constraintlayout.widget.ConstraintLayout>
+
+               <androidx.constraintlayout.widget.ConstraintLayout
+                   android:id="@+id/silver_stars"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="16dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent">
+
+                   <ImageView
+                       android:id="@+id/star_silver_1"
+                       android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:src="@drawable/ic_star_silver"
+                       app:layout_constraintBottom_toBottomOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toTopOf="parent" />
+
+                   <ImageView
+                       android:id="@+id/star_silver_2"
+                       android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:src="@drawable/ic_star_silver"
+                       app:layout_constraintBottom_toBottomOf="@+id/star_silver_1"
+                       app:layout_constraintStart_toEndOf="@+id/star_silver_1"
+                       app:layout_constraintTop_toTopOf="@+id/star_silver_1"
+                       app:layout_constraintVertical_bias="0.0" />
+
+               </androidx.constraintlayout.widget.ConstraintLayout>
+
+               <androidx.constraintlayout.widget.ConstraintLayout
+                   android:id="@+id/bronze_stars"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="16dp"
+                   app:layout_constraintBottom_toBottomOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent">
+
+                   <ImageView
+                       android:id="@+id/star1"
+                       android:layout_width="18dp"
+                       android:layout_height="18dp"
+                       android:src="@drawable/ic_star"
+                       app:layout_constraintBottom_toBottomOf="parent"
+                       app:layout_constraintStart_toStartOf="parent"
+                       app:layout_constraintTop_toTopOf="parent" />
+
+                   <ImageView
+                       android:id="@+id/star2"
+                       android:layout_width="18dp"
+                       android:layout_height="18dp"
+                       android:src="@drawable/ic_star"
+                       app:layout_constraintBottom_toBottomOf="@+id/star1"
+                       app:layout_constraintStart_toEndOf="@+id/star1"
+                       app:layout_constraintTop_toTopOf="@+id/star1"
+                       app:layout_constraintVertical_bias="0.0" />
+
+                   <ImageView
+                       android:id="@+id/star3"
+                       android:layout_width="18dp"
+                       android:layout_height="18dp"
+                       android:src="@drawable/ic_star"
+                       app:layout_constraintBottom_toBottomOf="@+id/star2"
+                       app:layout_constraintStart_toEndOf="@+id/star2"
+                       app:layout_constraintTop_toTopOf="@+id/star2" />
+
+               </androidx.constraintlayout.widget.ConstraintLayout>
 
            </androidx.constraintlayout.widget.ConstraintLayout>
 
