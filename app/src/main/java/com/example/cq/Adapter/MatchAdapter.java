@@ -46,7 +46,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MatchViewHolder holder, int position) {
 
-        // текущая дата
+        // сегодняшняя дата
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dateNow = LocalDateTime.now();
         // звезды
