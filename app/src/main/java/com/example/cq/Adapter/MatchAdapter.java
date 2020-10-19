@@ -1,8 +1,14 @@
 package com.example.cq.Adapter;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,24 +18,25 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.example.cq.MainActivity;
 import com.example.cq.Model.Match;
 import com.example.cq.R;
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
+import com.pixplicity.sharp.Sharp;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-public class MatchAdapter extends RecyclerView.Adapter<MatchViewHolder> {
+import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
+
+public class MatchAdapter extends RecyclerView.Adapter<MatchViewHolder>{
 
     List<Match> matches;
     Context context;
+    private RequestBuilder<PictureDrawable> requestBuilder;
 
     public MatchAdapter(List<Match> matches, Context context) {
         this.matches = matches;
@@ -141,13 +148,37 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchViewHolder> {
         }
 
         // логотип команд
-        Glide.with(holder.itemView.getContext())
-                .load(matches.get(position).getTeam_1().getImage())
-                .into(holder.logoTeam1);
 
-        Glide.with(holder.itemView.getContext())
-                .load(matches.get(position).getTeam_2().getImage())
-                .into(holder.logoTeam2);
+        String[] team1_image_parts = matches.get(position).getTeam_1().getImage().split("[.]");
+        String team1_image_format = team1_image_parts[team1_image_parts.length-1];
+        String[] team2_image_parts = matches.get(position).getTeam_2().getImage().split("[.]");
+        String team2_image_format = team2_image_parts[team2_image_parts.length-1];
+
+        if (team1_image_format.equals("svg")){
+            Uri uri = Uri.parse(matches.get(position).getTeam_1().getImage());
+            GlideToVectorYou
+                    .init()
+                    .with(context)
+                    .load(uri, holder.logoTeam1);
+        }
+        else{
+            Glide.with(holder.itemView.getContext())
+                    .load(matches.get(position).getTeam_1().getImage())
+                    .into(holder.logoTeam1);
+        }
+
+        if (team2_image_format.equals("svg")){
+            Uri uri = Uri.parse(matches.get(position).getTeam_2().getImage());
+            GlideToVectorYou
+                    .init()
+                    .with(context)
+                    .load(uri, holder.logoTeam2);
+        }
+        else{
+            Glide.with(holder.itemView.getContext())
+                    .load(matches.get(position).getTeam_2().getImage())
+                    .into(holder.logoTeam2);
+        }
 
         // логотип игры
         switch (matches.get(position).getGame()) {
