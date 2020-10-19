@@ -23,7 +23,6 @@ import com.example.cq.MainActivity;
 import com.example.cq.Model.Match;
 import com.example.cq.R;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
-import com.pixplicity.sharp.Sharp;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

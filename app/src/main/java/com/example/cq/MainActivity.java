@@ -2,6 +2,7 @@ package com.example.cq;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Base64;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView rv;
     MatchAdapter adapter;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +33,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rv = findViewById(R.id.rv_matches);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         String userName = "EM_dy3YY2h2UQR3";
         String password = "";
         String base = userName + ":" + password;
-        String authHeader = "Basic " + Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
+        final String authHeader = "Basic " + Base64.encodeToString(base.getBytes(), Base64.NO_WRAP);
 
         Call<Matches> call = apiService.getMatches(authHeader);
         call.enqueue(new Callback<Matches>() {
@@ -52,6 +55,32 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Call<Matches> call = apiService.getMatches(authHeader);
+                call.enqueue(new Callback<Matches>() {
+                    @Override
+                    public void onResponse(Call<Matches> call, Response<Matches> response) {
+                        Matches data = response.body();
+                        MatchAdapter adapter = new MatchAdapter(data.getData(),  getBaseContext());
+                        rv.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Matches> call, Throwable t) {
+                        Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
+
+
 
     }
 }
