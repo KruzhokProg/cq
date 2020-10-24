@@ -14,6 +14,8 @@ import com.example.cq.Model.Matches;
 import com.example.cq.Model.MatchesObject;
 import com.example.cq.Network.ApiClient;
 import com.example.cq.Network.ApiInterface;
+import com.leinardi.android.speeddial.SpeedDialActionItem;
+import com.leinardi.android.speeddial.SpeedDialView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     String authHeader;
     Calendar selectedDate;
     HorizontalCalendar horizontalCalendar;
+    SpeedDialView speedDialView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
                 UpdateRV(selectedDate);
             }
         });
+
+        speedDialView = findViewById(R.id.speedDial);
+        speedDialView.addActionItem(new SpeedDialActionItem.Builder(R.id.sd_fab, R.drawable.ic_game).create());
+        speedDialView.addActionItem(new SpeedDialActionItem.Builder(R.id.sd_main_fab, R.drawable.ic_people).create());
 
     }
 
