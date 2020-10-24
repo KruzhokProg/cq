@@ -164,6 +164,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchViewHolder>{
             Glide.with(holder.itemView.getContext())
                     .load(matches.get(position).getTeam_1().getImage())
                     .into(holder.logoTeam1);
+
         }
 
         if (team2_image_format.equals("svg")){

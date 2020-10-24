@@ -4,28 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/black">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+    <devs.mulham.horizontalcalendar.HorizontalCalendarView
+        android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_matches"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:background="@color/calendarColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/rv_item"
-        android:background="@color/black"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:textColorSelected="#F00"
+        app:textColorNormal="@color/light_gray"
+        app:selectorColor="@color/light_gray"/>
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_marginTop="110dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calendarView">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_matches"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/rv_item" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

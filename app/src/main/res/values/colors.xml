@@ -9,4 +9,5 @@
     <color name="white">#fff</color>
     <color name="black">#000</color>
     <color name="LIVE">#FA4B37</color>
+    <color name="calendarColor">#1F202D</color>
 </resources>
