@@ -27,6 +27,7 @@ import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
@@ -110,8 +111,17 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchViewHolder>{
             String time = matches.get(position).getDate_start().split("[T.]")[1];
             String fullDateMatch = date + " " + time;
             LocalDateTime dateMatch = LocalDateTime.parse(fullDateMatch, formatter);
+            // utc +3
+            dateMatch = dateMatch.plus(Duration.ofHours(3));
+            String shortTime;
+            if(dateMatch.getMinute() < 10) {
+                shortTime = String.valueOf(dateMatch.getHour()) + ":0" + String.valueOf(dateMatch.getMinute());
+            }
+            else{
+                shortTime = String.valueOf(dateMatch.getHour()) + ":" + String.valueOf(dateMatch.getMinute());
+            }
 
-            Duration duration = Duration.between(dateMatch, dateNow);
+            Duration duration = Duration.between(dateNow, dateMatch);
             if(duration.isNegative()){
                 holder.score.setTextColor(Color.parseColor("#FA4B37"));
                 holder.score.setText("LIVE");
@@ -125,23 +135,13 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchViewHolder>{
                 long minutes = duration.toMinutes()%60;
 
                 if(days > 0) {
-                    holder.matchStatus.setText("через " + String.valueOf(days) + " д. в " + String.valueOf(hours) + ":" + String.valueOf(minutes));
+                    holder.matchStatus.setText("через " + String.valueOf(days) + " д. в " + shortTime);
                 }
                 else if(hours > 0){
-                    if(minutes/10 == 0) {
-                        holder.matchStatus.setText("через " + String.valueOf(hours) + " ч. в " + String.valueOf(hours) + ":0" + String.valueOf(minutes));
-                    }
-                    else{
-                        holder.matchStatus.setText("через " + String.valueOf(hours) + " ч. в " + String.valueOf(hours) + ":" + String.valueOf(minutes));
-                    }
+                        holder.matchStatus.setText("через " + String.valueOf(hours) + " ч. в " + shortTime);
                 }
                 else{
-                    if(minutes/10 == 0) {
-                        holder.matchStatus.setText("через " + String.valueOf(minutes) + " м. в " + String.valueOf(hours) + ":0" + String.valueOf(minutes));
-                    }
-                    else{
-                        holder.matchStatus.setText("через " + String.valueOf(minutes) + " м. в " + String.valueOf(hours) + ":" + String.valueOf(minutes));
-                    }
+                        holder.matchStatus.setText("через " + String.valueOf(minutes) + " м. в " + shortTime);
                 }
             }
         }
